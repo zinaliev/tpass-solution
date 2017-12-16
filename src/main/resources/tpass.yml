@@ -1,0 +1,24 @@
+# dropwizard default configs
+# full file sample may be found here - https://github.com/dropwizard/dropwizard/blob/master/dropwizard-example/example.yml
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+
+# Logging settings.
+logging:
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  # Logger-specific levels.
+  loggers:
+    com.genesys.tpass: DEBUG
+
+  appenders:
+    - type: console
+      threshold: DEBUG
+      logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
+      timeZone: UTC
+
+# application configs
+history_size: 1000
