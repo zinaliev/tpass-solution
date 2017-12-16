@@ -10,24 +10,30 @@ import com.genesys.tpass.api.dto.VerificationResultDto;
 import com.google.common.io.Resources;
 import com.mashape.unirest.http.ObjectMapper;
 import com.mashape.unirest.http.Unirest;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
-class TPassApplicationTest {
+public class TPassApplicationIT {
 
     private final static String APP_MODE = "server";
 
-    @BeforeAll
-    static void setUpAll() throws Exception {
+    @BeforeClass
+    public static void setUpAll() throws Exception {
         setUpServer();
         setUpClient();
     }
 
-    static void setUpServer() throws Exception {
+    @AfterClass
+    public static void tearDown() throws Exception {
+        Unirest.shutdown();
+    }
+
+    private static void setUpServer() throws Exception {
         String[] applicationArgs = new String[2];
         applicationArgs[0] = APP_MODE;
         applicationArgs[1] = Resources.getResource("tpass-test.yml").getPath();
@@ -36,7 +42,7 @@ class TPassApplicationTest {
         new TPassApplication().run(applicationArgs);
     }
 
-    static void setUpClient() {
+    private static void setUpClient() {
 
         Unirest.setObjectMapper(new ObjectMapper() {
             private final com.fasterxml.jackson.databind.ObjectMapper jacksonObjectMapper
@@ -61,7 +67,7 @@ class TPassApplicationTest {
     }
 
     @Test
-    void testPasswordCreate_ExternalCall_ResponseCodeIsNotImplemented() throws Exception {
+    public void testPasswordCreate_ExternalCall_ResponseCodeIsNotImplemented() throws Exception {
         ApiResponseDto<PasswordDto> response = Unirest.get("http://localhost:8080/password/create")
                 .queryString("user", "John")
                 .queryString("timeout", 10)
@@ -73,7 +79,7 @@ class TPassApplicationTest {
     }
 
     @Test
-    void testPasswordVerify_ExternalCall_ResponseCodeIsNotImplemented() throws Exception {
+    public void testPasswordVerify_ExternalCall_ResponseCodeIsNotImplemented() throws Exception {
         ApiResponseDto<VerificationResultDto> response = Unirest.get("http://localhost:8080/password/verify")
                 .queryString("user", "John")
                 .queryString("pass","xxx")
@@ -85,7 +91,7 @@ class TPassApplicationTest {
     }
 
     @Test
-    void testStatisticsOperationsCount_ExternalCall_ResponseCodeIsNotImplemented() throws Exception {
+    public void testStatisticsOperationsCount_ExternalCall_ResponseCodeIsNotImplemented() throws Exception {
         ApiResponseDto<OperationsCountDto> response = Unirest.get("http://localhost:8080/statistics/operationsCount")
                 .asObject(ApiResponseDto.class)
                 .getBody();
@@ -95,7 +101,7 @@ class TPassApplicationTest {
     }
 
     @Test
-    void testStatisticsVerificationsLog_ExternalCall_ResponseCodeIsNotImplemented() throws Exception {
+    public void testStatisticsVerificationsLog_ExternalCall_ResponseCodeIsNotImplemented() throws Exception {
         ApiResponseDto<VerificationAttemptDto[]> response = Unirest.get("http://localhost:8080/statistics/verificationsLog")
                 .queryString("count", 100)
                 .asObject(ApiResponseDto.class)
