@@ -1,7 +1,8 @@
 package com.genesys.tpass
 
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import com.genesys.tpass.api.dto.*
+import com.genesys.tpass.api.dto.ApiResponse
+import com.genesys.tpass.api.dto.StatusCode
 import com.google.common.io.Resources
 import com.mashape.unirest.http.ObjectMapper
 import com.mashape.unirest.http.Unirest
@@ -15,7 +16,8 @@ import com.fasterxml.jackson.databind.ObjectMapper as JacksonObjectMapper
  *
  * @author rzinalie
  */
-class TPassApplicationTest {
+@SuppressWarnings("unchecked")
+class TPassApplicationIT {
     companion object {
 
         private const val APP_MODE = "server"
@@ -59,11 +61,11 @@ class TPassApplicationTest {
 
     @Test
     fun testPasswordCreateResponseCodeIsNotImplemented() {
-        val response: ApiResponse<Password> = Unirest.get("http://localhost:8080/password/create")
+        val response: ApiResponse<*> = Unirest.get("http://localhost:8080/password/create")
                 .queryString("user", "John")
                 .queryString("timeout", 10)
                 .asObject(ApiResponse::class.java)
-                .body as ApiResponse<Password>
+                .body as ApiResponse<*>
 
         assertEquals(StatusCode.NOT_IMPLEMENTED, response.code)
 
@@ -72,11 +74,11 @@ class TPassApplicationTest {
 
     @Test
     fun testPasswordVerifyResponseCodeIsNotImplemented() {
-        val response: ApiResponse<VerificationResult> = Unirest.get("http://localhost:8080/password/verify")
+        val response: ApiResponse<*> = Unirest.get("http://localhost:8080/password/verify")
                 .queryString("user", "John")
                 .queryString("pass", "xxx")
                 .asObject(ApiResponse::class.java)
-                .body as ApiResponse<VerificationResult>
+                .body as ApiResponse<*>
 
         assertEquals(StatusCode.NOT_IMPLEMENTED, response.code)
 
@@ -85,9 +87,9 @@ class TPassApplicationTest {
 
     @Test
     fun testStatisticsOperationsCountResponseCodeIsNotImplemented() {
-        val response: ApiResponse<OperationsCount> = Unirest.get("http://localhost:8080/statistics/operationsCount")
+        val response: ApiResponse<*> = Unirest.get("http://localhost:8080/statistics/operationsCount")
                 .asObject(ApiResponse::class.java)
-                .body as ApiResponse<OperationsCount>
+                .body as ApiResponse<*>
 
         assertEquals(StatusCode.NOT_IMPLEMENTED, response.code)
 
@@ -96,9 +98,9 @@ class TPassApplicationTest {
 
     @Test
     fun testStatisticsVerificationsLogResponseCodeIsNotImplemented() {
-        val response: ApiResponse<Array<VerificationAttempt>> = Unirest.get("http://localhost:8080/statistics/verificationsLog")
+        val response: ApiResponse<*> = Unirest.get("http://localhost:8080/statistics/verificationsLog")
                 .asObject(ApiResponse::class.java)
-                .body as ApiResponse<Array<VerificationAttempt>>
+                .body as ApiResponse<*>
 
         assertEquals(StatusCode.NOT_IMPLEMENTED, response.code)
 

@@ -6,5 +6,7 @@ package com.genesys.tpass.api.dto
  */
 enum class StatusCode {
     OK,
-    NOT_IMPLEMENTED
+    NOT_IMPLEMENTED,
+    INTERNAL_SERVER_ERROR,
+    BAD_REQUEST
 }

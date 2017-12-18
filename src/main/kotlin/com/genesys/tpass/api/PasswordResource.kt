@@ -23,7 +23,7 @@ class PasswordResource {
      */
     @GET
     @Path("/create")
-    fun create(@QueryParam("user") userName: String, @QueryParam("timeout") timeout: Int?): ApiResponse<Any> {
+    fun create(@QueryParam("user") userName: String, @QueryParam("timeout") timeout: Int): ApiResponse<Any> {
         return ApiResponse.notImplemented("/password/create")
     }
 

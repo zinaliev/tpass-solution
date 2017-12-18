@@ -7,9 +7,9 @@ import com.fasterxml.jackson.annotation.JsonInclude
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class ApiResponse<T>(
-        var message: String,
-        var code: StatusCode,
-        var data: T?) {
+        val message: String,
+        val code: StatusCode,
+        val data: T?) {
 
     companion object {
 
