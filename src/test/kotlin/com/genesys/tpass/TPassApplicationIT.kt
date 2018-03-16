@@ -1,8 +1,9 @@
 package com.genesys.tpass
 
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import com.genesys.tpass.api.dto.ApiResponse
-import com.genesys.tpass.api.dto.StatusCode
+import com.genesys.tpass.common.models.ApiResponse
+import com.genesys.tpass.common.models.StatusCode
+import com.genesys.tpass.dropwizard.TPassApplication
 import com.google.common.io.Resources
 import com.mashape.unirest.http.ObjectMapper
 import com.mashape.unirest.http.Unirest

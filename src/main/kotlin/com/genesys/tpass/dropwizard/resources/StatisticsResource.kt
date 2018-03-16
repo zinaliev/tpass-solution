@@ -1,7 +1,8 @@
-package com.genesys.tpass.api
+package com.genesys.tpass.dropwizard.resources
 
-import com.genesys.tpass.api.dto.ApiResponse
-import com.genesys.tpass.conf.TPassConfig
+import com.genesys.tpass.common.TPassService
+import com.genesys.tpass.common.models.ApiResponse
+import com.genesys.tpass.config.TPassConfig
 import javax.ws.rs.GET
 import javax.ws.rs.Path
 import javax.ws.rs.Produces
@@ -16,6 +17,8 @@ import javax.ws.rs.core.MediaType
 @Produces(MediaType.APPLICATION_JSON)
 class StatisticsResource {
 
+    private val service = TPassService.instance
+
     /**
      * Retrieve count of operations completed during service's up time
      * @return count of password creations, failed and passed verifications
@@ -23,7 +26,7 @@ class StatisticsResource {
     @GET
     @Path("/operationsCount")
     fun getOperationsCount(): ApiResponse<Any> {
-        return ApiResponse.notImplemented("/statistics/operationsCount")
+        return service.getOperationsCount()
     }
 
     /**
@@ -38,6 +41,6 @@ class StatisticsResource {
     @GET
     @Path("/verificationsLog")
     fun getVerificationsLog(@QueryParam("count") itemsCount: Int?): ApiResponse<Any> {
-        return ApiResponse.notImplemented("/statistics/verificationsLog")
+        return service.getVerificationsLog(itemsCount)
     }
 }

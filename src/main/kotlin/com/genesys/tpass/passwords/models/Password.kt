@@ -1,4 +1,4 @@
-package com.genesys.tpass.api.dto
+package com.genesys.tpass.passwords.models
 
 import com.fasterxml.jackson.annotation.JsonInclude
 

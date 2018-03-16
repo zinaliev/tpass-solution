@@ -1,7 +1,7 @@
-package com.genesys.tpass.api.exceptionmappers
+package com.genesys.tpass.dropwizard.exceptionmappers
 
-import com.genesys.tpass.api.dto.ApiResponse
-import com.genesys.tpass.api.dto.StatusCode
+import com.genesys.tpass.common.models.ApiResponse
+import com.genesys.tpass.common.models.StatusCode
 import javax.ws.rs.core.Response
 import javax.ws.rs.ext.ExceptionMapper
 

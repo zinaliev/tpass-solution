@@ -1,4 +1,4 @@
-package com.genesys.tpass.conf
+package com.genesys.tpass.config
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.dropwizard.Configuration

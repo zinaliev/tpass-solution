@@ -1,6 +1,7 @@
-package com.genesys.tpass.api
+package com.genesys.tpass.dropwizard.resources
 
-import com.genesys.tpass.api.dto.ApiResponse
+import com.genesys.tpass.common.TPassService
+import com.genesys.tpass.common.models.ApiResponse
 import javax.ws.rs.GET
 import javax.ws.rs.Path
 import javax.ws.rs.Produces
@@ -15,6 +16,8 @@ import javax.ws.rs.core.MediaType
 @Produces(MediaType.APPLICATION_JSON)
 class PasswordResource {
 
+    private val service = TPassService.instance
+
     /**
      * Generate password
      * @param userName user name (unique)
@@ -24,7 +27,7 @@ class PasswordResource {
     @GET
     @Path("/create")
     fun create(@QueryParam("user") userName: String, @QueryParam("timeout") timeout: Int): ApiResponse<Any> {
-        return ApiResponse.notImplemented("/password/create")
+        return service.createPassword(userName, timeout)
     }
 
     /**
@@ -38,6 +41,6 @@ class PasswordResource {
     @GET
     @Path("/verify")
     fun verify(@QueryParam("user") userName: String, @QueryParam("pass") password: String): ApiResponse<Any> {
-        return ApiResponse.notImplemented("/password/verify")
+        return service.verifyPassword(userName, password)
     }
 }
