@@ -68,7 +68,7 @@ class TPassApplicationIT {
                 .asObject(ApiResponse::class.java)
                 .body as ApiResponse<*>
 
-        assertEquals(StatusCode.NOT_IMPLEMENTED, response.code)
+        assertEquals(StatusCode.OK, response.code)
 
         println(JsonSerializer.asJson(response))
     }
@@ -81,7 +81,7 @@ class TPassApplicationIT {
                 .asObject(ApiResponse::class.java)
                 .body as ApiResponse<*>
 
-        assertEquals(StatusCode.NOT_IMPLEMENTED, response.code)
+        assertEquals(StatusCode.OK, response.code)
 
         println(JsonSerializer.asJson(response))
     }

@@ -16,5 +16,9 @@ data class ApiResponse<T>(
         fun notImplemented(methodName: String): ApiResponse<Any> {
             return ApiResponse("method $methodName is not implemented", StatusCode.NOT_IMPLEMENTED, null)
         }
+
+        fun ok(data : Any): ApiResponse<Any> {
+            return ApiResponse("succeed", StatusCode.OK, data)
+        }
     }
 }
