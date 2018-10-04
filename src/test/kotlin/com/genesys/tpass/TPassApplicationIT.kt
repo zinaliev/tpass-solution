@@ -14,7 +14,6 @@ import kotlin.test.assertEquals
 import com.fasterxml.jackson.databind.ObjectMapper as JacksonObjectMapper
 
 /**
- *
  * @author rzinalie
  */
 @SuppressWarnings("unchecked")
