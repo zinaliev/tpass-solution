@@ -1,9 +1,9 @@
 package com.genesys.tpass.dropwizard
 
 import com.fasterxml.jackson.module.kotlin.KotlinModule
+import com.genesys.tpass.config.TPassConfig
 import com.genesys.tpass.dropwizard.exceptionmappers.DefaultExceptionMapper
 import com.genesys.tpass.dropwizard.exceptionmappers.KotlinIllegalArgumentExceptionMapper
-import com.genesys.tpass.config.TPassConfig
 import com.genesys.tpass.dropwizard.exceptionmappers.KotlinNotImplementedExceptionMapper
 import com.genesys.tpass.dropwizard.resources.PasswordResource
 import com.genesys.tpass.dropwizard.resources.StatisticsResource
@@ -22,15 +22,16 @@ class TPassApplication : Application<TPassConfig>() {
     companion object {
         private val logger = LoggerFactory.getLogger(TPassApplication::class.java)
 
-        @JvmStatic fun main(actualArgs: Array<String>) {
-            try{
+        @JvmStatic
+        fun main(actualArgs: Array<String>) {
+            try {
                 val args: Array<String> = if (actualArgs.isNotEmpty()) actualArgs else
                     arrayOf("server", Resources.getResource("tpass.yml").path)
 
                 logger.info("Running with args '{}'", Joiner.on(' ').join(args))
 
                 TPassApplication().run(*args)
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 logger.error("failed to start", e)
             }
         }
